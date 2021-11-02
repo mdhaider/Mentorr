@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "769950660232",
+    "project_id": "mentorr-212b2",
+    "storage_bucket": "mentorr-212b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769950660232:android:3e467a69cf03d9fd3f513d",
+        "android_client_info": {
+          "package_name": "com.geckosoftlabs.mentorr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769950660232-k57181flfqtennthfaqqs4itlhhnp7ib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrbSKqxzipicajmyjATpfqnTge5tL3tpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769950660232-k57181flfqtennthfaqqs4itlhhnp7ib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
