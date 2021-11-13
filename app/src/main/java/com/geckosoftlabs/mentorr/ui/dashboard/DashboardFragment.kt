@@ -1,6 +1,7 @@
 package com.geckosoftlabs.mentorr.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.geckosoftlabs.mentorr.FirebaseUtils
 import com.geckosoftlabs.mentorr.R
 import com.geckosoftlabs.mentorr.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
-
+    private val TAG= "DashboardFragment"
     private lateinit var dashboardViewModel: DashboardViewModel
     private var _binding: FragmentDashboardBinding? = null
 
@@ -38,8 +40,46 @@ class DashboardFragment : Fragment() {
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //uploadData()
+        readData()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun uploadData(){
+        // create a dummy data
+        val hashMap = hashMapOf<String, Any>(
+            "name" to "John doe",
+            "city" to "Nairobi",
+            "age" to 24
+        )
+
+        // use the add() method to create a document inside users collection
+        FirebaseUtils().fireStoreDatabase.collection("users")
+            .add(hashMap)
+            .addOnSuccessListener {
+                Log.d(TAG, "Added document with ID ${it.id}")
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error adding document $exception")
+            }
+    }
+
+    private fun readData(){
+            FirebaseUtils().fireStoreDatabase.collection("users")
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    querySnapshot.forEach { document ->
+                        Log.d(TAG, "Read document with ID ${document.id} ${document.data.toString()}")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents $exception")
+                }
     }
 }

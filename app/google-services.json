@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "769950660232",
+    "firebase_url": "https://mentorr-212b2-default-rtdb.firebaseio.com",
     "project_id": "mentorr-212b2",
     "storage_bucket": "mentorr-212b2.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "769950660232-amhet0nkb12lk1m80pj15aha4nr3pj59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.geckosoftlabs.mentorr",
+            "certificate_hash": "0b6bcfbf66b23a22447dbf3950b1424fcdd719ce"
+          }
+        },
         {
           "client_id": "769950660232-k57181flfqtennthfaqqs4itlhhnp7ib.apps.googleusercontent.com",
           "client_type": 3

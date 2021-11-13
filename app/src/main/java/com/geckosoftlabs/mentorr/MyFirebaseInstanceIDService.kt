@@ -12,9 +12,8 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseInstanceIDService: FirebaseMessagingService () {
-    private val TAG = "FireBaseMessagingService"
-    var NOTIFICATION_CHANNEL_ID = "net.larnetch.notification"
-    var NOTIFICATION_ID = 100
+    private var NOTIFICATION_CHANNEL_ID = "net.larnetch.notification"
+    private var NOTIFICATION_ID = 100
 
     override fun onMessageReceived(p0: RemoteMessage) {
         super.onMessageReceived(p0)
@@ -33,13 +32,12 @@ class MyFirebaseInstanceIDService: FirebaseMessagingService () {
         Log.e("token", "get new token")
     }
 
-    fun showNotification(
+    private fun showNotification(
         context: Context,
         title: String?,
         message: String?
     ) {
-        val ii: Intent
-        ii = Intent(context, MainActivity::class.java)
+        val ii = Intent(context, MainActivity::class.java)
         ii.data = Uri.parse("custom://" + System.currentTimeMillis())
         ii.action = "actionstring" + System.currentTimeMillis()
         ii.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
