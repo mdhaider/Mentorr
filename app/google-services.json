@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "769950660232",
+    "firebase_url": "https://mentorr-212b2-default-rtdb.firebaseio.com",
+    "project_id": "mentorr-212b2",
+    "storage_bucket": "mentorr-212b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769950660232:android:3e467a69cf03d9fd3f513d",
+        "android_client_info": {
+          "package_name": "com.geckosoftlabs.mentorr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769950660232-amhet0nkb12lk1m80pj15aha4nr3pj59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.geckosoftlabs.mentorr",
+            "certificate_hash": "0b6bcfbf66b23a22447dbf3950b1424fcdd719ce"
+          }
+        },
+        {
+          "client_id": "769950660232-k57181flfqtennthfaqqs4itlhhnp7ib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrbSKqxzipicajmyjATpfqnTge5tL3tpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769950660232-k57181flfqtennthfaqqs4itlhhnp7ib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
