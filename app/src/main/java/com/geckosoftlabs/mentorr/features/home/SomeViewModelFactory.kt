@@ -1,4 +1,4 @@
-package com.geckosoftlabs.mentorr.ui
+package com.geckosoftlabs.mentorr.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,4 +1,4 @@
-package com.geckosoftlabs.mentorr.ui
+package com.geckosoftlabs.mentorr.features.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +10,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.geckosoftlabs.mentorr.databinding.ActivityLoginBinding
 import androidx.lifecycle.repeatOnLifecycle
-import com.geckosoftlabs.mentorr.ui.utils.MEMO_KEY
-import com.geckosoftlabs.mentorr.ui.utils.dataStore
+import com.geckosoftlabs.mentorr.features.home.MainRepository
+import com.geckosoftlabs.mentorr.features.home.MainViewModel
+import com.geckosoftlabs.mentorr.features.home.SomeViewModelFactory
+import com.geckosoftlabs.mentorr.utils.MEMO_KEY
+import com.geckosoftlabs.mentorr.utils.dataStore
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -28,27 +31,28 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: MainViewModel
     lateinit var systemVerification: String
+    //if code sending failed, will use to resend
+    private var forceResendingToken: PhoneAuthProvider.ForceResendingToken? = null
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         installSplashScreen()
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val viewModel: MainViewModel by viewModels { SomeViewModelFactory(MainRepository(applicationContext))}
+        val viewModel: MainViewModel by viewModels { SomeViewModelFactory(MainRepository(applicationContext)) }
         this.viewModel = viewModel
 
-        setContentView(binding.root)
-        setBtnMemo()
-        getMemo()
+        firebaseAuth = FirebaseAuth.getInstance()
 
-        val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        val mCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
                 super.onCodeSent(p0, p1)
                 systemVerification = p0
+                forceResendingToken = p1
             }
-
 
             override fun onCodeAutoRetrievalTimeOut(p0: String) {
                 super.onCodeAutoRetrievalTimeOut(p0)
@@ -57,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onVerificationCompleted(p0: PhoneAuthCredential) {
                 Log.e(TAG, "onVerificationCompleted: ${p0.smsCode}")
-
             }
 
             override fun onVerificationFailed(p0: FirebaseException) {
@@ -75,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                 .setPhoneNumber(binding.etPhoneNum.text.toString())       // Phone number to verify
                 .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                 .setActivity(this)                 // Activity (for callback binding)
-                .setCallbacks(callbacks)     // OnVerificationStateChangedCallbacks
+                .setCallbacks(mCallBacks)     // OnVerificationStateChangedCallbacks
                 .build()
             PhoneAuthProvider.verifyPhoneNumber(options)
         }
@@ -83,6 +86,22 @@ class LoginActivity : AppCompatActivity() {
         binding.btnVerify.setOnClickListener {
             if (binding.etEnterOtp.text?.isNotEmpty() == true) {
                 signIn_with_credential(binding.etEnterOtp.text.toString())
+            }
+        }
+
+        binding.btnSendOtp.setOnClickListener {
+            val options = forceResendingToken?.let { it1 ->
+                PhoneAuthOptions.newBuilder(firebaseAuth)
+                    .setPhoneNumber(binding.etPhoneNum.text.toString())
+                    .setTimeout(60L, TimeUnit.SECONDS)
+                    .setActivity(this)
+                    .setCallbacks(mCallBacks)
+                    .setForceResendingToken(it1)
+                    .build()
+            }
+
+            if (options != null) {
+                PhoneAuthProvider.verifyPhoneNumber(options)
             }
         }
     }
@@ -93,9 +112,8 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this) {
             Log.e(TAG, "signIn: Hey  you  digned  in")
 
-        }.addOnFailureListener(this) {
-            Toast.makeText(this, "Sign  in with ${credential.smsCode} failed:(", Toast.LENGTH_LONG)
-                .show()
+        }.addOnFailureListener { e->
+            Toast.makeText(this, "Sign  in with ${credential.smsCode} failed:(", Toast.LENGTH_LONG).show()
         }
     }
 

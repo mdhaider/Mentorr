@@ -1,4 +1,4 @@
-package com.geckosoftlabs.mentorr
+package com.geckosoftlabs.mentorr.utils
 
 import com.google.firebase.firestore.FirebaseFirestore
 

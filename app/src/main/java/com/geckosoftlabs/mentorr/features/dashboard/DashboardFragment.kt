@@ -1,4 +1,4 @@
-package com.geckosoftlabs.mentorr.ui.dashboard
+package com.geckosoftlabs.mentorr.features.dashboard
 
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.geckosoftlabs.mentorr.FirebaseUtils
-import com.geckosoftlabs.mentorr.R
+import com.geckosoftlabs.mentorr.utils.FirebaseUtils
 import com.geckosoftlabs.mentorr.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {

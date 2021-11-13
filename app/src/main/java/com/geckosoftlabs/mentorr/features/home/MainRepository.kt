@@ -1,9 +1,9 @@
-package com.geckosoftlabs.mentorr.ui
+package com.geckosoftlabs.mentorr.features.home
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
-import com.geckosoftlabs.mentorr.ui.utils.MEMO_KEY
-import com.geckosoftlabs.mentorr.ui.utils.dataStore
+import com.geckosoftlabs.mentorr.utils.MEMO_KEY
+import com.geckosoftlabs.mentorr.utils.dataStore
 
 class MainRepository (
     private val context: Context

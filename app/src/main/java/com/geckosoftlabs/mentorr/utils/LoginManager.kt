@@ -1,4 +1,4 @@
-package com.geckosoftlabs.mentorr.ui.utils
+package com.geckosoftlabs.mentorr.utils
 
 import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey

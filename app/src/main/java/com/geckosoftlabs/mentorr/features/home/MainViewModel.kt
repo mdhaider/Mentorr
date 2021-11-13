@@ -1,7 +1,8 @@
-package com.geckosoftlabs.mentorr.ui
+package com.geckosoftlabs.mentorr.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.geckosoftlabs.mentorr.features.home.MainRepository
 import kotlinx.coroutines.launch
 
 
