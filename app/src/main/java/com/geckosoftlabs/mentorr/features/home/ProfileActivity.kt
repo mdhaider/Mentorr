@@ -3,8 +3,8 @@ package com.geckosoftlabs.mentorr.features.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.geckosoftlabs.mentorr.databinding.ActivityProfileBinding
 import com.geckosoftlabs.mentorr.MainActivity
+import com.geckosoftlabs.mentorr.databinding.ActivityProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileActivity : AppCompatActivity() {

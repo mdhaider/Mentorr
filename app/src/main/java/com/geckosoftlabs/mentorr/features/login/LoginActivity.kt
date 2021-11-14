@@ -13,8 +13,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.geckosoftlabs.mentorr.features.home.MainRepository
 import com.geckosoftlabs.mentorr.features.home.MainViewModel
 import com.geckosoftlabs.mentorr.features.home.SomeViewModelFactory
-import com.geckosoftlabs.mentorr.utils.MEMO_KEY
-import com.geckosoftlabs.mentorr.utils.dataStore
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -117,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun getMemo() {
+    /*private fun getMemo() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 getMemoFlow().collect { memo ->
@@ -126,11 +124,11 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun getMemoFlow() = dataStore.data
+*/
+   /* private fun getMemoFlow() = dataStore.data
         .map { preferences ->
             preferences[MEMO_KEY] ?: ""
-        }
+        }*/
 
     private fun setBtnMemo() {
         viewModel.setMemo("loggedout")

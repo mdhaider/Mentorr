@@ -11,7 +11,7 @@ class MainViewModel (
 ) : ViewModel() {
     fun setMemo(memo: String) {
         viewModelScope.launch {
-            mainRepository.setMemo(memo)
+           // mainRepository.setMemo(memo)
         }
     }
 }
