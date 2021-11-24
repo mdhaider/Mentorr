@@ -15,13 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.coroutineScope
 import com.geckosoftlabs.mentorr.databinding.ActivityMainBinding
-import com.geckosoftlabs.mentorr.features.home.ProfileActivity
 import com.geckosoftlabs.mentorr.features.login.LoginActivity
 import com.geckosoftlabs.mentorr.utils.DataStoreManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -36,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         lifecycle.coroutineScope.launchWhenCreated {
             dataStoreManager.getLoggedInState().collect { loggedInState ->
-                launchActivity(loggedInState)
+               // launchActivity(loggedInState)
             }
         }
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -77,13 +73,7 @@ class MainActivity : AppCompatActivity() {
         if(isLoggedIn){
             startActivity(Intent(this, MainActivity::class.java))
         } else {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
-    }
-
-    private fun setValue(){
-        CoroutineScope(Dispatchers.IO).launch {
-            dataStoreManager.saveLoggedInState(false)
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 }
